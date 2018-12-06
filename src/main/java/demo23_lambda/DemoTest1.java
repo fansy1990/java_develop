@@ -4,6 +4,7 @@ package demo23_lambda;
 interface IMessage1{
     public void print();
 //    public void aaa(); // 不能定义多个函数
+//    public void print2(int x); // 就算有多个参数也不行
 }
 
 /**
