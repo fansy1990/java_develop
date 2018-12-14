@@ -11,14 +11,14 @@ class Message{
     }
 }
 class Utils{
-    private static Message message;
-
+//    private static Message message;
+    private static ThreadLocal<Message> thread = new ThreadLocal<>();
     public static Message getMessage() {
-        return message;
+        return thread.get();
     }
 
     public static void setMessage(Message message) {
-        Utils.message = message;
+        thread.set(message);
     }
 }
 class UseMessage{
