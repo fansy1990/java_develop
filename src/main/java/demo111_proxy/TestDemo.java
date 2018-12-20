@@ -3,7 +3,6 @@ package demo111_proxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.util.Arrays;
 
 interface ISubject{
     void eat(String who, String what ,int howMany);
@@ -40,10 +39,21 @@ class ProxySubject implements InvocationHandler{
      */
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        System.out.println(proxy.getClass().getName());
-        System.out.println(method);
-        System.out.println(Arrays.toString(args));
-        return null;
+//        System.out.println(proxy.getClass().getName());
+//        System.out.println(method);
+//        System.out.println(Arrays.toString(args));
+        this.before();
+//        Object result = method.invoke(proxy,args);// 需要调用真实主题，而不是代理主题
+        Object result = method.invoke(target,args);
+        this.after();
+
+        return result;
+    }
+    public void before(){
+        System.out.println("[ProxySubject] before...");
+    }
+    public void after(){
+        System.out.println("[ProxySubject] after...");
     }
 }
 
